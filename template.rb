@@ -14,7 +14,17 @@ def add_gems
   gem 'friendly_id', '~> 5.3'
   gem 'sidekiq', '~> 6.1', '>= 6.1.1'
   gem 'name_of_person', '~> 1.1', '>= 1.1.1'
+
+  # gem_group :development, :test do
+  #   gem 'hirb-unicode', '~> 0.0.5'
+  #   gem 'rspec-rails', '~> 4.0'
+  #   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
+  #   gem 'faker', '~> 2.11'
+  #   gem 'pry-rails', '~> 0.3.9'
+  # end
 end
+
+
 
 def add_users
   # Install Devise
@@ -84,6 +94,7 @@ end
 
 def add_foreman
   copy_file "Procfile"
+  copy_file "Procfile.dev"
 end
 
 def add_friendly_id
