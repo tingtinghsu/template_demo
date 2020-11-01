@@ -11,19 +11,19 @@ end
 
 def add_gems
   gem 'devise', '~> 4.7', '>= 4.7.2'
-  gem 'friendly_id', '~> 5.3'
   gem 'sidekiq', '~> 6.1', '>= 6.1.1'
   gem 'name_of_person', '~> 1.1', '>= 1.1.1'
-
-  # gem_group :development, :test do
-  #   gem 'hirb-unicode', '~> 0.0.5'
-  #   gem 'rspec-rails', '~> 4.0'
-  #   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
-  #   gem 'faker', '~> 2.11'
-  #   gem 'pry-rails', '~> 0.3.9'
-  # end
+  gem 'friendly_id', git: 'https://github.com/norman/friendly_id'   
 end
 
+gem_group :development, :test do
+  gem 'foreman', '~> 0.87.1'  
+  gem 'hirb-unicode', '~> 0.0.5'
+  gem 'rspec-rails', '~> 4.0'
+  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
+  gem 'faker', '~> 2.11'
+  gem 'pry-rails', '~> 0.3.9'
+end
 
 
 def add_users
@@ -97,10 +97,6 @@ def add_foreman
   copy_file "Procfile.dev"
 end
 
-def add_friendly_id
-  generate "friendly_id"
-end
-
 # Main setup
 source_paths
 
@@ -113,7 +109,6 @@ after_bundle do
   add_foreman
   copy_templates
   add_tailwind
-  add_friendly_id
   copy_postcss_config
 
   # Migrate
@@ -125,11 +120,11 @@ after_bundle do
   git commit: %Q{ -m "Initial commit" }
 
   say
-  say "Kickoff app successfully created! 👍", :green
+  say "Successfully created your Rails App with this template! 👍", :green
   say
   say "Switch to your app by running:"
   say "$ cd #{app_name}", :yellow
   say
   say "Then run:"
-  say "$ rails server", :green
+  say "$ foreman start -f Procfile.dev", :green
 end
